@@ -1,0 +1,122 @@
+Guia de Instalação e Execução do Projeto de Chat (Versão para Windows)
+Este guia detalha todos os passos necessários para configurar e rodar a aplicação de chat em um novo computador Windows.
+
+Passo 1: Instalação dos Programas Essenciais (Pré-requisitos)
+O computador precisa de dois programas principais instalados: Python e Git.
+
+1. Instalar o Python:
+O Python é a linguagem de programação na qual o servidor foi escrito.
+
+Onde baixar: Vá para o site oficial python.org e baixe a versão mais recente para Windows.
+
+Instrução CRÍTICA: Durante a instalação, na primeira tela, marque a caixa que diz "Add Python to PATH". Isso é extremamente importante para que os comandos funcionem no terminal.
+
+Como verificar: Após a instalação, abra um novo terminal (CMD ou PowerShell) e digite python --version. Se uma versão aparecer (ex: Python 3.11.4), está correto.
+
+2. Instalar o Git:
+O Git é a ferramenta que usaremos para baixar o código diretamente do seu repositório no GitHub.
+
+Onde baixar: Vá para o site oficial git-scm.com/download/win.
+
+Instalação: Baixe o instalador e execute-o. Você pode manter todas as configurações padrão durante a instalação.
+
+Como verificar: Em um novo terminal, digite git --version. Se uma versão aparecer, está tudo certo.
+
+Passo 2: Baixando o Código do GitHub
+Com as ferramentas prontas, vamos pegar o código do projeto.
+
+1. Abra o Terminal:
+Você pode usar o "Prompt de Comando" (CMD) ou o "PowerShell", ambos encontrados no Menu Iniciar.
+
+2. Clone o Repositório:
+Use o comando git clone seguido da URL do seu repositório no GitHub.
+
+Bash
+
+# Substitua a URL pela URL real do seu repositório!
+git clone https://github.com/marcosoliveiracss0/CHAT_GRUPO_RAFAEL.git
+Este comando criará uma nova pasta com o nome do seu repositório e baixará todos os arquivos do projeto para dentro dela.
+
+(Alternativa Simples sem Git)
+Se preferir, pode ir à página do repositório no GitHub, clicar no botão verde < > Code e selecionar "Download ZIP". Depois, descompacte o arquivo ZIP no seu computador.
+
+Passo 3: Configurando o Ambiente do Projeto
+Esta é a etapa mais técnica, mas crucial para que o projeto funcione sem conflitos.
+
+1. Navegue para a Pasta do Projeto:
+No terminal, entre na pasta que o Git acabou de criar:
+
+Bash
+
+# Troque "nome-do-repositorio" pelo nome real da pasta
+cd nome-do-repositorio
+2. Crie um Ambiente Virtual (Virtual Environment):
+Isso cria uma "caixa de areia" isolada para as bibliotecas do nosso projeto.
+
+Bash
+
+python -m venv venv
+Isso criará uma nova pasta chamada venv dentro do seu projeto.
+
+3. Ative o Ambiente Virtual:
+No Windows, o comando varia um pouco dependendo do terminal que você está usando.
+
+Se você estiver usando o Prompt de Comando (CMD):
+
+DOS
+
+.\venv\Scripts\activate
+Se você estiver usando o PowerShell:
+
+PowerShell
+
+.\venv\Scripts\Activate.ps1
+(Se der um erro de permissão no PowerShell, execute este comando: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process e tente ativar novamente).
+
+Confirmação: Se funcionou, você verá (venv) aparecer no início da linha do seu terminal. Isso indica que o ambiente virtual está ativo.
+
+4. Instale as Dependências do Projeto:
+Agora, com o ambiente ativo, vamos instalar todas as bibliotecas que o projeto precisa de uma só vez.
+
+Bash
+
+pip install -r requirements.txt
+O pip vai ler o arquivo requirements.txt e instalar tudo automaticamente.
+
+Passo 4: Executando a Aplicação
+Estamos prontos! O ambiente está configurado.
+
+1. Crie a Pasta de Uploads:
+O projeto precisa de uma pasta para salvar as imagens enviadas, e ela não vem do GitHub. No terminal, com o ambiente ainda ativo, digite:
+
+Bash
+
+mkdir uploads
+2. Rode o Servidor:
+Com o ambiente virtual ainda ativo (você deve ver (venv)), execute o seguinte comando:
+
+Bash
+
+python app.py
+3. Verifique o Resultado:
+O terminal deve mostrar algumas mensagens e terminar com uma linha parecida com esta:
+* Running on http://127.0.0.1:5000
+
+Isso significa que o servidor do seu chat está rodando com sucesso!
+
+4. Acesse o Chat:
+Abra seu navegador de internet (Chrome, Firefox, etc.) e acesse o endereço:
+http://127.0.0.1:5000
+
+Você deverá ver a tela de login que criamos.
+
+Passo 5: Acesso por Outros Computadores na Rede
+Para que outras pessoas na mesma rede Wi-Fi possam acessar o chat:
+
+No computador que está rodando o servidor (app.py), descubra o endereço de IP local. Abra um outro terminal e digite ipconfig. Procure pelo "Endereço IPv4" na seção do seu adaptador de rede (Wi-Fi ou Ethernet). O endereço será algo como 192.168.1.10.
+
+As outras pessoas na mesma rede devem colocar esse endereço no navegador delas, seguido da porta :5000.
+
+Exemplo: http://192.168.1.10:5000
+
+Observação: Se outras pessoas não conseguirem se conectar, o problema é quase sempre o Firewall do Windows no computador do servidor, que pode estar bloqueando a conexão. Você precisará criar uma "Regra de Entrada" para permitir o tráfego na porta 5000.
