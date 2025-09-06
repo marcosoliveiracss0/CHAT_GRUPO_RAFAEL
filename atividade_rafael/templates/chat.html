@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+</head>
+<body class="chat-body">
+    <div class="main-container">
+        <div class="users-panel">
+            <div class="panel-header"><h3>Usuários</h3></div>
+            <ul id="user-list" class="user-list"></ul>
+        </div>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h1>Sala: Geral</h1>
+                <p>Logado como: <strong>{{ username }}</strong> <a href="/logout">(Sair)</a></p>
+            </div>
+            <div id="messages-box" class="messages-box"></div>
+            <div class="input-area">
+                <label for="photo-input" class="input-button" title="Enviar foto">&#128247;</label>
+                <input type="file" id="photo-input" accept="image/png, image/jpeg, image/gif" hidden>
+                
+                <button id="emoji-btn" class="input-button" title="Selecionar emoji">&#128512;</button>
+
+                <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+                <button id="send-button">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <emoji-picker class="light" style="position: absolute; display: none;"></emoji-picker>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
